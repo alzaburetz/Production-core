@@ -1,0 +1,57 @@
+@model IEnumerable<Production.Models.Cart>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+@{
+    Production.Controllers.CartController.makeOrder(this.Model);
+}
+<h1>Index</h1>
+@if (User.Identity.Name == "admin@admin.net") {
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.item_name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.sum)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.items_amount)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.user_id)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.item_name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sum)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.items_amount)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.user_id)
+            </td>
+            <td>
+                <button class="btn btn-danger">
+                <a asp-action="Delete" asp-route-id="@item.id">Удалить</a></button>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
+

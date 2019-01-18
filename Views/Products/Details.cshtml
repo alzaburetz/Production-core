@@ -1,0 +1,29 @@
+@model Production.Models.Product
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+    
+<h1>Подробности</h1>
+
+<div>
+    <h4>@Html.DisplayFor(model => model.p_name)</h4>
+    <hr />
+    <dl class="row">
+        <dd class = "col-sm-12">
+            @Html.DisplayFor(model => model.p_desc)
+        </dd>
+    </dl>
+</div>
+<div>
+    <!-- <input name="amount" type="text" max="model.p_amount"/> -->
+    <button onclick=@{
+        Production.Controllers.ProductsController.addToCart(Model.p_price*Model.p_amount, Model.p_amount,User.Identity.Name,Model.p_name);
+}>Добавить в корзину</button>
+@if (User.Identity.Name == "admin@admin.net") {
+    <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> 
+}
+    <a asp-action="Index">Back to List</a>
+</div>

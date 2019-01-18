@@ -1,0 +1,43 @@
+@model IEnumerable<Production.Models.Product>
+
+@{
+    ViewData["Title"] = "Список товаров";
+}
+
+<h1>Список товаров</h1>
+@if (User.Identity.Name == "admin@admin.net") {
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+}
+<div class="main">
+@foreach (var item in Model) {
+        <h4>@Html.DisplayFor(modelItem => item.p_name)</h4>
+    <div class="row">
+        <div class="col-lg-9">
+            @Html.DisplayFor(modelItem => item.p_desc)
+        </div>
+        <div class="col">
+            Цена:
+            @Html.DisplayFor(modelItem => item.p_price)
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-dark">
+                
+                <a asp-action="Details" asp-route-id="@item.id">Details</a> 
+            </button>
+        </div>
+    </div>
+    <br>
+        @if (User.Identity.Name == "admin@admin.net") {
+    <td>
+                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
+                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+            </td>
+    }
+           
+}
+</div>
+@if(User.Identity.Name == "user@user.com") {
+    <h1>SOSI</h1>
+}
