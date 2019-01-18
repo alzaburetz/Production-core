@@ -23,28 +23,28 @@ namespace Production.Controllers
         public static void makeOrder(IEnumerable<Cart> cart) {
             MySqlConnection conn = new MySqlConnection("server=localhost; port=3306;   database=Production; user=alexey; password=''");
             conn.Open();
-            // string[] items = new string[cart.Count()];
-            // float sum = 0.0f;
-            // int i = 0;
-            // foreach (Cart item in cart) {
-            //     Cart input = new Cart();
-            //     input.item_name = item.item_name;
-            //     sum += item.sum;
-            //     input.user_id = item.user_id;
-            //     string json  = JsonConvert.SerializeObject(input);
-            //     items[i] = json;
-            //     i++;
+            string[] items = new string[cart.Count()];
+            float sum = 0.0f;
+            int i = 0;
+            foreach (Cart item in cart) {
+                Cart input = new Cart();
+                input.item_name = item.item_name;
+                sum += item.sum;
+                input.user_id = item.user_id;
+                object json  = JsonConvert.SerializeObject(input);
+                items[i] = json.ToString();
+                i++;
                 
-            // }
-            // string final = "[";
-            // for (i = 0; i < items.Length; i++) {
-            //     final += items[i] + ",";
-            // }
-            // final += "]";
+            }
+            object final = "[";
+            for (i = 0; i < items.Length; i++) {
+                final += items[i] + ",";
+            }
+            final += "]";
             
-            //     string query = "INSERT INTO Orders(items, summa) VALUES('" + final + "'" + ',' + sum + ')';
-            //     MySqlCommand command = new MySqlCommand(query, conn);
-            //     command.ExecuteNonQuery();
+                string query = "INSERT INTO Orders(items, summa) VALUES('" + final + "'" + ',' + sum + ')';
+                MySqlCommand command = new MySqlCommand(query, conn);
+                command.ExecuteNonQuery();
             
             conn.Close();
 
