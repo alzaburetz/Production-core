@@ -11,9 +11,9 @@ namespace Production.Controllers
 {
     public class ManufacturersController : Controller
     {
-        private readonly ManufacturerContext _context;
+        private readonly DBContext _context;
 
-        public ManufacturersController(ManufacturerContext context)
+        public ManufacturersController(DBContext context)
         {
             _context = context;
         }

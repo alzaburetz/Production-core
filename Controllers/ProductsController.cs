@@ -6,31 +6,27 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Production.Models;
-using MySql.Data.Common;
-using MySql.Data.Types;
-using MySql.Data.MySqlClient;
-using MySql.Data.EntityFrameworkCore;
 
 namespace Production.Controllers
 {
     public class ProductsController : Controller
     {
-        private readonly ProductContext _context;
+        private readonly DBContext _context;
 
-        public ProductsController(ProductContext context)
+        public ProductsController(DBContext context)
         {
             _context = context;
         }
 
-        // public static void addToCart(float sum, int amount, string id,string item_p_name) {
-        //     MySqlConnection conn = new MySqlConnection("server=localhost; port=3306;   database=Production; user=alexey; password=''");
-        //     conn.Open();
-        //     string query = "INSERT INTO Cart(sum,items_amount,user_id,item_p_name) VALUES(" +
-        //                     sum + ',' + amount + ',' + '"' + id + '"' + ',' + '"' + item_p_name + '"' + ')';
-        //     MySqlCommand command = new MySqlCommand(query, conn);
-        //     command.ExecuteNonQuery();
-        //     conn.Close();
-        // }
+
+        public async void AddToCart([FromQuery] float sum, [FromQuery] int amount,[FromQuery] string id,[FromQuery] string item_p_name){ 
+            Cart cart = new Cart();
+            cart.sum = sum;
+            cart.user_id = id;
+            cart.items_amount = amount;
+            cart.item_name = item_p_name;
+            await _context.Cart.AddAsync(cart);
+        }
 
         // GET: Products
         public async Task<IActionResult> Index()

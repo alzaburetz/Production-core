@@ -13,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using Production.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MySql.Data.EntityFrameworkCore;
 
 namespace Production
 {
@@ -40,25 +39,12 @@ namespace Production
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddDbContext<Production.Models.ProductContext>(options =>
+            services.AddDbContext<Production.Models.DBContext>(options =>
                 options.UseSqlite(
                     Configuration.GetConnectionString("DefaultConnection")
                 ));
 
-            services.AddDbContext<Production.Models.ManufacturerContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")
-                ));
-
-            services.AddDbContext<Production.Models.CartContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")
-                ));
-
-            services.AddDbContext<Production.Models.OrdersContext>(options =>
-                options.UseSqlite(
-                    Configuration.GetConnectionString("DefaultConnection")
-                ));
+            
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
                 .AddEntityFrameworkStores<ApplicationDbContext>();

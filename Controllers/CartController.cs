@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Production.Models;
-using MySql.Data.MySqlClient;
 using Newtonsoft.Json;
 using System.Diagnostics;
 
@@ -14,9 +13,9 @@ namespace Production.Controllers
 {
     public class CartController : Controller
     {
-        private readonly CartContext _context;
+        private readonly DBContext _context;
 
-        public CartController(CartContext context)
+        public CartController(DBContext context)
         {
             _context = context;
         }

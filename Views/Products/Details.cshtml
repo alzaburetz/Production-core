@@ -18,10 +18,23 @@
     </dl>
 </div>
 <div>
-    <!-- <input name="amount" type="text" max="model. amount"/> -->
-    
+
 @if (User.Identity.Name == "admin@admin.net") {
     <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> 
 }
     <a asp-action="Index">Back to List</a>
 </div>
+<button onclick="addToCart()">Добавить в корзину</button> 
+<script> 
+    let path = window.location.origin; 
+    let price = @Html.Raw(Model.price); 
+    let amount = @Html.Raw(Model.amount); 
+    let sum = price * amount; 
+    let userName = "@Html.Raw(User.Identity.Name)"; 
+    let modelName = "@Html.Raw(Model.p_name)"; 
+    let requestPath = path+`/Products/AddToCart?sum=${sum}&amount=${amount}&id="${userName}"&item_name="${modelName}"`; 
+    console.log(requestPath); 
+    function addToCart(){ 
+        fetch(requestPath).then( r => console.log(r)); 
+    } 
+</script>

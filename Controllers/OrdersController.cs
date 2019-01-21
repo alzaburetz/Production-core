@@ -11,9 +11,9 @@ namespace Production.Controllers
 {
     public class OrdersController : Controller
     {
-        private readonly OrdersContext _context;
+        private readonly DBContext _context;
 
-        public OrdersController(OrdersContext context)
+        public OrdersController(DBContext context)
         {
             _context = context;
         }
