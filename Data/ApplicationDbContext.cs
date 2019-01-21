@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Production.Models;
 
 namespace Production.Data
 {
@@ -12,5 +13,6 @@ namespace Production.Data
             : base(options)
         {
         }
+        public DbSet<Production.Models.Materials> Materials { get; set; }
     }
 }

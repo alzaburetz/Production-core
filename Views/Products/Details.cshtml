@@ -4,6 +4,10 @@
     ViewData["Title"] = "Details";
 }
 
+@{
+    
+}
+
 
     
 <h1>Подробности</h1>
@@ -32,7 +36,7 @@
     let sum = price * amount; 
     let userName = "@Html.Raw(User.Identity.Name)"; 
     let modelName = "@Html.Raw(Model.p_name)"; 
-    let requestPath = path+`/Products/AddToCart?sum=${sum}&amount=${amount}&id="${userName}"&item_name="${modelName}"`; 
+    let requestPath = path+`/Products/AddToCart?sum=${sum}&amount=${amount}&id=${userName}&item_name=${modelName}`; 
     console.log(requestPath); 
     function addToCart(){ 
         fetch(requestPath).then( r => console.log(r)); 

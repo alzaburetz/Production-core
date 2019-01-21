@@ -5,44 +5,27 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Production.Data;
 using Production.Models;
-using System.Diagnostics;
 
 namespace Production.Controllers
 {
-    public class ProductsController : Controller
+    public class MaterialsController : Controller
     {
-        private readonly DBContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public ProductsController(DBContext context)
+        public MaterialsController(ApplicationDbContext context)
         {
             _context = context;
         }
 
-        public async void reduceMaterials(int amountt, int id) {
-            var result = await _context.Materials.FindAsync(id);
-            int reduce = result.amount - amountt;
-            result.amount = reduce;
-            await _context.SaveChangesAsync();
-        }
-
-        public async void AddToCart([FromQuery] float sum, [FromQuery] int amount,[FromQuery] string id,[FromQuery] string item_p_name){ 
-            Cart cart = new Cart();
-            cart.sum = sum;
-            cart.user_id = id;
-            cart.items_amount = amount;
-            cart.item_name = item_p_name;
-            _context.Add(cart);
-            await _context.SaveChangesAsync();
-        }
-
-        // GET: Products
+        // GET: Materials
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Product.ToListAsync());
+            return View(await _context.Materials.ToListAsync());
         }
 
-        // GET: Products/Details/5
+        // GET: Materials/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -50,40 +33,39 @@ namespace Production.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product
+            var materials = await _context.Materials
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (product == null)
+            if (materials == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(materials);
         }
 
-        // GET: Products/Create
+        // GET: Materials/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Products/Create
+        // POST: Materials/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,p_name, description,amount,price,m_id,material_id,material")] Product product)
+        public async Task<IActionResult> Create([Bind("id,materialname")] Materials materials)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(product);
-                reduceMaterials(product.material, product.material_id);
+                _context.Add(materials);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            return View(materials);
         }
 
-        // GET: Products/Edit/5
+        // GET: Materials/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -91,22 +73,22 @@ namespace Production.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product.FindAsync(id);
-            if (product == null)
+            var materials = await _context.Materials.FindAsync(id);
+            if (materials == null)
             {
                 return NotFound();
             }
-            return View(product);
+            return View(materials);
         }
 
-        // POST: Products/Edit/5
+        // POST: Materials/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,p_name, description,amount,price,m_id,material_id,material")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("id,materialname")] Materials materials)
         {
-            if (id != product.id)
+            if (id != materials.id)
             {
                 return NotFound();
             }
@@ -115,12 +97,12 @@ namespace Production.Controllers
             {
                 try
                 {
-                    _context.Update(product);
+                    _context.Update(materials);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ProductExists(product.id))
+                    if (!MaterialsExists(materials.id))
                     {
                         return NotFound();
                     }
@@ -131,10 +113,10 @@ namespace Production.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(product);
+            return View(materials);
         }
 
-        // GET: Products/Delete/5
+        // GET: Materials/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -142,30 +124,30 @@ namespace Production.Controllers
                 return NotFound();
             }
 
-            var product = await _context.Product
+            var materials = await _context.Materials
                 .FirstOrDefaultAsync(m => m.id == id);
-            if (product == null)
+            if (materials == null)
             {
                 return NotFound();
             }
 
-            return View(product);
+            return View(materials);
         }
 
-        // POST: Products/Delete/5
+        // POST: Materials/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var product = await _context.Product.FindAsync(id);
-            _context.Product.Remove(product);
+            var materials = await _context.Materials.FindAsync(id);
+            _context.Materials.Remove(materials);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductExists(int id)
+        private bool MaterialsExists(int id)
         {
-            return _context.Product.Any(e => e.id == id);
+            return _context.Materials.Any(e => e.id == id);
         }
     }
 }

@@ -6,5 +6,7 @@ namespace Production.Models {
         public int amount {get; set;}
         public float price {get; set;}
         public int m_id {get; set;}
+        public int material_id {get; set;}
+        public int material {get; set;}
     }
 }

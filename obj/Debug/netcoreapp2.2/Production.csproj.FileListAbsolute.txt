@@ -104,3 +104,8 @@
 /home/anton/CourseProject/Production-core/obj/Debug/netcoreapp2.2/Production.dll
 /home/anton/CourseProject/Production-core/obj/Debug/netcoreapp2.2/Production.pdb
 /home/anton/CourseProject/Production-core/obj/Debug/netcoreapp2.2/Production.csproj.CopyComplete
+/home/anton/CourseProject/Production-core/obj/Debug/netcoreapp2.2/Razor/Views/Materials/Create.g.cshtml.cs
+/home/anton/CourseProject/Production-core/obj/Debug/netcoreapp2.2/Razor/Views/Materials/Delete.g.cshtml.cs
+/home/anton/CourseProject/Production-core/obj/Debug/netcoreapp2.2/Razor/Views/Materials/Details.g.cshtml.cs
+/home/anton/CourseProject/Production-core/obj/Debug/netcoreapp2.2/Razor/Views/Materials/Edit.g.cshtml.cs
+/home/anton/CourseProject/Production-core/obj/Debug/netcoreapp2.2/Razor/Views/Materials/Index.g.cshtml.cs

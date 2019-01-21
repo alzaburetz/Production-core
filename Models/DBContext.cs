@@ -16,6 +16,6 @@ namespace Production.Models {
         public DbSet<Production.Models.Manufacturer> Manufacturer { get; set; }
         public DbSet<Production.Models.Orders> Orders { get; set; }
         public DbSet<Production.Models.Product> Product { get; set; }
-
+        public DbSet<Production.Models.Materials> Materials { get; set; }   
     }
 }
