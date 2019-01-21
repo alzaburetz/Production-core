@@ -41,23 +41,23 @@ namespace Production
                     Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddDbContext<Production.Models.ProductContext>(options =>
-                options.UseMySQL(
-                    Configuration.GetConnectionString("DatabaseConnection")
+                options.UseSqlite(
+                    Configuration.GetConnectionString("DefaultConnection")
                 ));
 
             services.AddDbContext<Production.Models.ManufacturerContext>(options =>
-                options.UseMySQL(
-                    Configuration.GetConnectionString("DatabaseConnection")
+                options.UseSqlite(
+                    Configuration.GetConnectionString("DefaultConnection")
                 ));
 
             services.AddDbContext<Production.Models.CartContext>(options =>
-                options.UseMySQL(
-                    Configuration.GetConnectionString("DatabaseConnection")
+                options.UseSqlite(
+                    Configuration.GetConnectionString("DefaultConnection")
                 ));
 
             services.AddDbContext<Production.Models.OrdersContext>(options =>
-                options.UseMySQL(
-                    Configuration.GetConnectionString("DatabaseConnection")
+                options.UseSqlite(
+                    Configuration.GetConnectionString("DefaultConnection")
                 ));
             services.AddDefaultIdentity<IdentityUser>()
                 .AddDefaultUI(UIFramework.Bootstrap4)
@@ -77,7 +77,7 @@ namespace Production
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                // The default HSTS value is 30 days. You may want to change this for p_nameion scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 

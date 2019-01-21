@@ -22,15 +22,15 @@ namespace Production.Controllers
             _context = context;
         }
 
-        public static void addToCart(float sum, int amount, string id,string item_name) {
-            MySqlConnection conn = new MySqlConnection("server=localhost; port=3306;   database=Production; user=alexey; password=''");
-            conn.Open();
-            string query = "INSERT INTO Cart(sum,items_amount,user_id,item_name) VALUES(" +
-                            sum + ',' + amount + ',' + '"' + id + '"' + ',' + '"' + item_name + '"' + ')';
-            MySqlCommand command = new MySqlCommand(query, conn);
-            command.ExecuteNonQuery();
-            conn.Close();
-        }
+        // public static void addToCart(float sum, int amount, string id,string item_p_name) {
+        //     MySqlConnection conn = new MySqlConnection("server=localhost; port=3306;   database=Production; user=alexey; password=''");
+        //     conn.Open();
+        //     string query = "INSERT INTO Cart(sum,items_amount,user_id,item_p_name) VALUES(" +
+        //                     sum + ',' + amount + ',' + '"' + id + '"' + ',' + '"' + item_p_name + '"' + ')';
+        //     MySqlCommand command = new MySqlCommand(query, conn);
+        //     command.ExecuteNonQuery();
+        //     conn.Close();
+        // }
 
         // GET: Products
         public async Task<IActionResult> Index()
@@ -67,7 +67,7 @@ namespace Production.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,p_name,p_desc,p_amount,p_price,m_id")] Product product)
+        public async Task<IActionResult> Create([Bind("id,p_name, description,amount,price,m_id")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -99,7 +99,7 @@ namespace Production.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,p_name,p_desc,p_amount,p_price,m_id")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("id,p_name, description,amount,price,m_id")] Product product)
         {
             if (id != product.id)
             {

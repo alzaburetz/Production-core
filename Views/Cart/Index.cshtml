@@ -4,9 +4,6 @@
     ViewData["Title"] = "Index";
 }
 
-@{
-    Production.Controllers.CartController.makeOrder(this.Model);
-}
 <h1>Index</h1>
 @if (User.Identity.Name == "admin@admin.net") {
 <p>

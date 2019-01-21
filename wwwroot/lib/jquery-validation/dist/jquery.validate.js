@@ -931,7 +931,7 @@ $.extend( $.validator, {
 			var place, group, errorID, v,
 				error = this.errorsFor( element ),
 				elementID = this.idOrName( element ),
-				describedBy = $( element ).attr( "aria-describedby" );
+				 descriptionribedBy = $( element ).attr( "aria- descriptionribedby" );
 
 			if ( error.length ) {
 
@@ -971,19 +971,19 @@ $.extend( $.validator, {
 					error.attr( "for", elementID );
 
 					// If the element is not a child of an associated label, then it's necessary
-					// to explicitly apply aria-describedby
+					// to explicitly apply aria- descriptionribedby
 				} else if ( error.parents( "label[for='" + this.escapeCssMeta( elementID ) + "']" ).length === 0 ) {
 					errorID = error.attr( "id" );
 
-					// Respect existing non-error aria-describedby
-					if ( !describedBy ) {
-						describedBy = errorID;
-					} else if ( !describedBy.match( new RegExp( "\\b" + this.escapeCssMeta( errorID ) + "\\b" ) ) ) {
+					// Respect existing non-error aria- descriptionribedby
+					if ( ! descriptionribedBy ) {
+						 descriptionribedBy = errorID;
+					} else if ( ! descriptionribedBy.match( new RegExp( "\\b" + this.escapeCssMeta( errorID ) + "\\b" ) ) ) {
 
 						// Add to end of list if not already present
-						describedBy += " " + errorID;
+						 descriptionribedBy += " " + errorID;
 					}
-					$( element ).attr( "aria-describedby", describedBy );
+					$( element ).attr( "aria- descriptionribedby",  descriptionribedBy );
 
 					// If this element is grouped, then assign to all elements in the same group
 					group = this.groups[ element.name ];
@@ -992,7 +992,7 @@ $.extend( $.validator, {
 						$.each( v.groups, function( name, testgroup ) {
 							if ( testgroup === group ) {
 								$( "[name='" + v.escapeCssMeta( name ) + "']", v.currentForm )
-									.attr( "aria-describedby", error.attr( "id" ) );
+									.attr( "aria- descriptionribedby", error.attr( "id" ) );
 							}
 						} );
 					}
@@ -1011,12 +1011,12 @@ $.extend( $.validator, {
 
 		errorsFor: function( element ) {
 			var name = this.escapeCssMeta( this.idOrName( element ) ),
-				describer = $( element ).attr( "aria-describedby" ),
+				 descriptionriber = $( element ).attr( "aria- descriptionribedby" ),
 				selector = "label[for='" + name + "'], label[for='" + name + "'] *";
 
-			// 'aria-describedby' should directly reference the error element
-			if ( describer ) {
-				selector = selector + ", #" + this.escapeCssMeta( describer )
+			// 'aria- descriptionribedby' should directly reference the error element
+			if (  descriptionriber ) {
+				selector = selector + ", #" + this.escapeCssMeta(  descriptionriber )
 					.replace( /\s+/g, ", #" );
 			}
 

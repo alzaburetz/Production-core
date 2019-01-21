@@ -22,8 +22,8 @@ namespace Production.Data.Migrations
                 name: "Product",
                 columns: table => new {
                     id = table.Column<int>(nullable: false),
-                    product = table.Column<string>(maxLength: 100, nullable: false),
-                    description = table.Column<string>(maxLength: 5000, nullable: true),
+                    p_name = table.Column<string>(maxLength: 100, nullable: false),
+                     descriptionription = table.Column<string>(maxLength: 5000, nullable: true),
                     amount = table.Column<int>(nullable: false, defaultValue: 0),
                     price = table.Column<float>(nullable: false),
                     m_id = table.Column<int>(nullable: false)

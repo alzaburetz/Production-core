@@ -20,8 +20,8 @@ namespace Production.Data.Migrations
                 modelBuilder.Entity("Production.Models.Product", b =>
             {
                 b.Property<int>("id").ValueGeneratedOnAdd();
-                b.Property<string>("product").HasMaxLength(100);
-                b.Property<string>("description").HasMaxLength(5000);
+                b.Property<string>("p_name").HasMaxLength(100);
+                b.Property<string>(" descriptionription").HasMaxLength(5000);
                 b.Property<int>("amount");
                 b.Property<float>("price");
                 b.Property<int>("m_id").IsRequired();

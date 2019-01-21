@@ -487,7 +487,7 @@ $.validator.addMethod( "dateFA", function( value, element ) {
  * @result false
  *
  * @example <input name="pippo" class="{dateITA:true}" />
- * @desc Declares an optional input element whose value must be a valid date.
+ * @ description Declares an optional input element whose value must be a valid date.
  *
  * @name $.validator.methods.dateITA
  * @type Boolean
@@ -902,8 +902,8 @@ $.validator.addMethod( "phoneUS", function( phone_number, element ) {
 * 99.999-999
 * 99999999
 */
-$.validator.addMethod( "postalcodeBR", function( cep_value, element ) {
-	return this.optional( element ) || /^\d{2}.\d{3}-\d{3}?$|^\d{5}-?\d{3}?$/.test( cep_value );
+$.validator.addMethod( "postalcodeBR", function( ce value, element ) {
+	return this.optional( element ) || /^\d{2}.\d{3}-\d{3}?$|^\d{5}-?\d{3}?$/.test( ce value );
 }, "Informe um CEP válido." );
 
 /**
@@ -942,13 +942,13 @@ $.validator.addMethod( "postcodeUK", function( value, element ) {
  *
  * The end result is that neither of these inputs:
  *
- *	<input class="productinfo" name="partnumber">
- *	<input class="productinfo" name="description">
+ *	<input class="p_nameinfo" name="partnumber">
+ *	<input class="p_nameinfo" name=" descriptionription">
  *
  *	...will validate unless at least one of them is filled.
  *
- * partnumber:	{require_from_group: [1,".productinfo"]},
- * description: {require_from_group: [1,".productinfo"]}
+ * partnumber:	{require_from_group: [1,".p_nameinfo"]},
+ *  descriptionription: {require_from_group: [1,".p_nameinfo"]}
  *
  * options[0]: number of fields that must be filled in the group
  * options[1]: CSS selector that defines the group of conditionally required fields
@@ -981,22 +981,22 @@ $.validator.addMethod( "require_from_group", function( value, element, options )
  *
  * The end result, is that none of these inputs:
  *
- *	<input class="productinfo" name="partnumber">
- *	<input class="productinfo" name="description">
- *	<input class="productinfo" name="color">
+ *	<input class="p_nameinfo" name="partnumber">
+ *	<input class="p_nameinfo" name=" descriptionription">
+ *	<input class="p_nameinfo" name="color">
  *
  *	...will validate unless either at least two of them are filled,
  *	OR none of them are.
  *
- * partnumber:	{skip_or_fill_minimum: [2,".productinfo"]},
- * description: {skip_or_fill_minimum: [2,".productinfo"]},
- * color:		{skip_or_fill_minimum: [2,".productinfo"]}
+ * partnumber:	{ski or_fill_minimum: [2,".p_nameinfo"]},
+ *  descriptionription: {ski or_fill_minimum: [2,".p_nameinfo"]},
+ * color:		{ski or_fill_minimum: [2,".p_nameinfo"]}
  *
  * options[0]: number of fields that must be filled in the group
  * options[1]: CSS selector that defines the group of conditionally required fields
  *
  */
-$.validator.addMethod( "skip_or_fill_minimum", function( value, element, options ) {
+$.validator.addMethod( "ski or_fill_minimum", function( value, element, options ) {
 	var $fields = $( options[ 1 ], element.form ),
 		$fieldsFirst = $fields.eq( 0 ),
 		validator = $fieldsFirst.data( "valid_skip" ) ? $fieldsFirst.data( "valid_skip" ) : $.extend( {}, this ),
@@ -1008,7 +1008,7 @@ $.validator.addMethod( "skip_or_fill_minimum", function( value, element, options
 	// Store the cloned validator for future validation
 	$fieldsFirst.data( "valid_skip", validator );
 
-	// If element isn't being validated, run each skip_or_fill_minimum field's validation rules
+	// If element isn't being validated, run each ski or_fill_minimum field's validation rules
 	if ( !$( element ).data( "being_validated" ) ) {
 		$fields.data( "being_validated", true );
 		$fields.each( function() {
@@ -1098,7 +1098,7 @@ $.validator.addMethod( "url2", function( value, element ) {
  * Works with all kind of text inputs.
  *
  * @example <input type="text" size="20" name="VehicleID" class="{required:true,vinUS:true}" />
- * @desc Declares a required input element whose value must be a valid vehicle identification number.
+ * @ description Declares a required input element whose value must be a valid vehicle identification number.
  *
  * @name $.validator.methods.vinUS
  * @type Boolean

@@ -13,15 +13,13 @@
     <hr />
     <dl class="row">
         <dd class = "col-sm-12">
-            @Html.DisplayFor(model => model.p_desc)
+            @Html.DisplayFor(model => model.description)
         </dd>
     </dl>
 </div>
 <div>
-    <!-- <input name="amount" type="text" max="model.p_amount"/> -->
-    <button onclick=@{
-        Production.Controllers.ProductsController.addToCart(Model.p_price*Model.p_amount, Model.p_amount,User.Identity.Name,Model.p_name);
-}>Добавить в корзину</button>
+    <!-- <input name="amount" type="text" max="model. amount"/> -->
+    
 @if (User.Identity.Name == "admin@admin.net") {
     <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> 
 }

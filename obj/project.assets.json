@@ -14651,11 +14651,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "/home/anton/Production/Production.csproj",
+      "projectUniqueName": "/home/anton/CourseProject/Production-core/Production.csproj",
       "projectName": "Production",
-      "projectPath": "/home/anton/Production/Production.csproj",
+      "projectPath": "/home/anton/CourseProject/Production-core/Production.csproj",
       "packagesPath": "/home/anton/.nuget/packages/",
-      "outputPath": "/home/anton/Production/obj/",
+      "outputPath": "/home/anton/CourseProject/Production-core/obj/",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "/usr/share/dotnet/sdk/NuGetFallbackFolder"

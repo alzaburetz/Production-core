@@ -14,11 +14,11 @@
 
   function _defineProperties(target, props) {
     for (var i = 0; i < props.length; i++) {
-      var descriptor = props[i];
-      descriptor.enumerable = descriptor.enumerable || false;
-      descriptor.configurable = true;
-      if ("value" in descriptor) descriptor.writable = true;
-      Object.defineProperty(target, descriptor.key, descriptor);
+      var  descriptionriptor = props[i];
+       descriptionriptor.enumerable =  descriptionriptor.enumerable || false;
+       descriptionriptor.configurable = true;
+      if ("value" in  descriptionriptor)  descriptionriptor.writable = true;
+      Object.defineProperty(target,  descriptionriptor.key,  descriptionriptor);
     }
   }
 
@@ -50,7 +50,7 @@
 
       if (typeof Object.getOwnPropertySymbols === 'function') {
         ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {
-          return Object.getOwnPropertyDescriptor(source, sym).enumerable;
+          return Object.getOwnProperty descriptionriptor(source, sym).enumerable;
         }));
       }
 
@@ -1436,13 +1436,13 @@
 
     var TAB_KEYCODE = 9; // KeyboardEvent.which value for tab key
 
-    var ARROW_UP_KEYCODE = 38; // KeyboardEvent.which value for up arrow key
+    var ARROW_U KEYCODE = 38; // KeyboardEvent.which value for up arrow key
 
     var ARROW_DOWN_KEYCODE = 40; // KeyboardEvent.which value for down arrow key
 
     var RIGHT_MOUSE_BUTTON_WHICH = 3; // MouseEvent.which value for the right button (assuming a right-handed mouse)
 
-    var REGEXP_KEYDOWN = new RegExp(ARROW_UP_KEYCODE + "|" + ARROW_DOWN_KEYCODE + "|" + ESCAPE_KEYCODE);
+    var REGEX KEYDOWN = new RegExp(ARROW_U KEYCODE + "|" + ARROW_DOWN_KEYCODE + "|" + ESCAPE_KEYCODE);
     var Event = {
       HIDE: "hide" + EVENT_KEY,
       HIDDEN: "hidden" + EVENT_KEY,
@@ -1451,7 +1451,7 @@
       CLICK: "click" + EVENT_KEY,
       CLICK_DATA_API: "click" + EVENT_KEY + DATA_API_KEY,
       KEYDOWN_DATA_API: "keydown" + EVENT_KEY + DATA_API_KEY,
-      KEYUP_DATA_API: "keyup" + EVENT_KEY + DATA_API_KEY
+      KEYU DATA_API: "keyup" + EVENT_KEY + DATA_API_KEY
     };
     var ClassName = {
       DISABLED: 'disabled',
@@ -1792,13 +1792,13 @@
 
       Dropdown._dataApiKeydownHandler = function _dataApiKeydownHandler(event) {
         // If not input/textarea:
-        //  - And not a key in REGEXP_KEYDOWN => not a dropdown command
+        //  - And not a key in REGEX KEYDOWN => not a dropdown command
         // If input/textarea:
         //  - If space key => not a dropdown command
         //  - If key is other than escape
         //    - If key is not up or down => not a dropdown command
         //    - If trigger inside the menu => not a dropdown command
-        if (/input|textarea/i.test(event.target.tagName) ? event.which === SPACE_KEYCODE || event.which !== ESCAPE_KEYCODE && (event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_UP_KEYCODE || $$$1(event.target).closest(Selector.MENU).length) : !REGEXP_KEYDOWN.test(event.which)) {
+        if (/input|textarea/i.test(event.target.tagName) ? event.which === SPACE_KEYCODE || event.which !== ESCAPE_KEYCODE && (event.which !== ARROW_DOWN_KEYCODE && event.which !== ARROW_U KEYCODE || $$$1(event.target).closest(Selector.MENU).length) : !REGEX KEYDOWN.test(event.which)) {
           return;
         }
 
@@ -1831,7 +1831,7 @@
 
         var index = items.indexOf(event.target);
 
-        if (event.which === ARROW_UP_KEYCODE && index > 0) {
+        if (event.which === ARROW_U KEYCODE && index > 0) {
           // Up
           index--;
         }
@@ -1874,7 +1874,7 @@
      */
 
 
-    $$$1(document).on(Event.KEYDOWN_DATA_API, Selector.DATA_TOGGLE, Dropdown._dataApiKeydownHandler).on(Event.KEYDOWN_DATA_API, Selector.MENU, Dropdown._dataApiKeydownHandler).on(Event.CLICK_DATA_API + " " + Event.KEYUP_DATA_API, Dropdown._clearMenus).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (event) {
+    $$$1(document).on(Event.KEYDOWN_DATA_API, Selector.DATA_TOGGLE, Dropdown._dataApiKeydownHandler).on(Event.KEYDOWN_DATA_API, Selector.MENU, Dropdown._dataApiKeydownHandler).on(Event.CLICK_DATA_API + " " + Event.KEYU DATA_API, Dropdown._clearMenus).on(Event.CLICK_DATA_API, Selector.DATA_TOGGLE, function (event) {
       event.preventDefault();
       event.stopPropagation();
 
@@ -1941,7 +1941,7 @@
       RESIZE: "resize" + EVENT_KEY,
       CLICK_DISMISS: "click.dismiss" + EVENT_KEY,
       KEYDOWN_DISMISS: "keydown.dismiss" + EVENT_KEY,
-      MOUSEUP_DISMISS: "mouseup.dismiss" + EVENT_KEY,
+      MOUSEU DISMISS: "mouseup.dismiss" + EVENT_KEY,
       MOUSEDOWN_DISMISS: "mousedown.dismiss" + EVENT_KEY,
       CLICK_DATA_API: "click" + EVENT_KEY + DATA_API_KEY
     };
@@ -2026,7 +2026,7 @@
           return _this.hide(event);
         });
         $$$1(this._dialog).on(Event.MOUSEDOWN_DISMISS, function () {
-          $$$1(_this._element).one(Event.MOUSEUP_DISMISS, function (event) {
+          $$$1(_this._element).one(Event.MOUSEU DISMISS, function (event) {
             if ($$$1(event.target).is(_this._element)) {
               _this._ignoreBackdropClick = true;
             }
@@ -2547,7 +2547,7 @@
     };
     var Selector = {
       TOOLTIP: '.tooltip',
-      TOOLTIP_INNER: '.tooltip-inner',
+      TOOLTI INNER: '.tooltip-inner',
       ARROW: '.arrow'
     };
     var Trigger = {
@@ -2682,7 +2682,7 @@
           var tip = this.getTipElement();
           var tipId = Util.getUID(this.constructor.NAME);
           tip.setAttribute('id', tipId);
-          this.element.setAttribute('aria-describedby', tipId);
+          this.element.setAttribute('aria- descriptionribedby', tipId);
           this.setContent();
 
           if (this.config.animation) {
@@ -2772,7 +2772,7 @@
 
           _this2._cleanTipClass();
 
-          _this2.element.removeAttribute('aria-describedby');
+          _this2.element.removeAttribute('aria- descriptionribedby');
 
           $$$1(_this2.element).trigger(_this2.constructor.Event.HIDDEN);
 
@@ -2834,7 +2834,7 @@
 
       _proto.setContent = function setContent() {
         var tip = this.getTipElement();
-        this.setElementContent($$$1(tip.querySelectorAll(Selector.TOOLTIP_INNER)), this.getTitle());
+        this.setElementContent($$$1(tip.querySelectorAll(Selector.TOOLTI INNER)), this.getTitle());
         $$$1(tip).removeClass(ClassName.FADE + " " + ClassName.SHOW);
       };
 
