@@ -19,36 +19,35 @@ namespace Production.Controllers
         {
             _context = context;
         }
-        // public static void makeOrder(IEnumerable<Cart> cart) {
-        //     MySqlConnection conn = new MySqlConnection("server=localhost; port=3306;   database=Production; user=alexey; password=''");
-        //     conn.Open();
-        //     string[] items = new string[cart.Count()];
-        //     float sum = 0.0f;
-        //     int i = 0;
-        //     foreach (Cart item in cart) {
-        //         Cart input = new Cart();
-        //         input.item_name = item.item_name;
-        //         sum += item.sum;
-        //         input.user_id = item.user_id;
-        //         object json  = JsonConvert.SerializeObject(input);
-        //         items[i] = json.ToString();
-        //         i++;
+        public async void makeOrder() {
+        var cart = _context.Cart.Where(x => x.user_id == User.Identity.Name)
+            .ToArray();
+            string[] items = new string[cart.Count()];
+            float sum = 0.0f;
+            int i = 0;
+            foreach (Cart item in cart) {
+                Cart input = new Cart();
+                input.item_name = item.item_name;
+                sum += item.sum;
+                input.user_id = item.user_id;
+                object json  = JsonConvert.SerializeObject(input);
+                items[i] = json.ToString();
+                i++;
                 
-        //     }
-        //     object final = "[";
-        //     for (i = 0; i < items.Length; i++) {
-        //         final += items[i] + ",";
-        //     }
-        //     final += "]";
+            }
+            object final = "[";
+            for (i = 0; i < items.Length; i++) {
+                final += items[i] + ",";
+            }
+            final += "]";
+            Orders order = new Orders();
+            order.items = final.ToString();
+            order.summa = sum;
+             _context.Add(order);
+            await _context.SaveChangesAsync();
+            Console.Beep();
             
-        //         string query = "INSERT INTO Orders(items, summa) VALUES('" + final + "'" + ',' + sum + ')';
-        //         MySqlCommand command = new MySqlCommand(query, conn);
-        //         command.ExecuteNonQuery();
-            
-        //     conn.Close();
-
-            
-        // }
+        }
         // GET: Cart
         public async Task<IActionResult> Index()
         {
