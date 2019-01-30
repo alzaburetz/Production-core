@@ -12,9 +12,9 @@ namespace Production.Controllers
 {
     public class MaterialsController : Controller
     {
-        private readonly ApplicationDbContext _context;
+        private readonly DBContext _context;
 
-        public MaterialsController(ApplicationDbContext context)
+        public MaterialsController(DBContext context)
         {
             _context = context;
         }
@@ -54,7 +54,7 @@ namespace Production.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,materialname,amount")] Materials materials)
+        public async Task<IActionResult> Create([Bind("id,materialname,amount,m_id")] Materials materials)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace Production.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,materialname,amount")] Materials materials)
+        public async Task<IActionResult> Edit(int id, [Bind("id,materialname,amount,m_id")] Materials materials)
         {
             if (id != materials.id)
             {

@@ -71,7 +71,7 @@ namespace Production.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("id,p_name, description,amount,price,m_id,material_id,material")] Product product)
+        public async Task<IActionResult> Create([Bind("id,p_name, description,amount,price,material_id,material")] Product product)
         {
             if (ModelState.IsValid)
             {
@@ -104,7 +104,7 @@ namespace Production.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("id,p_name, description,amount,price,m_id,material_id,material")] Product product)
+        public async Task<IActionResult> Edit(int id, [Bind("id,p_name, description,amount,price,material_id,material")] Product product)
         {
             if (id != product.id)
             {

@@ -17,7 +17,28 @@ namespace Production.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.1-servicing-10028");
-                modelBuilder.Entity("Production.Models.Product", b =>
+              
+
+            modelBuilder.Entity("Production.Models.Manufacturer", b =>
+            {
+                b.Property<int>("id").IsRequired().ValueGeneratedOnAdd();
+                b.Property<string>("name").HasMaxLength(100);
+                b.Property<string>("address").HasMaxLength(100);
+                b.HasKey("id");
+            });
+
+            modelBuilder.Entity("Production.Models.Materials", b =>
+            {
+                b.Property<int>("id").IsRequired().ValueGeneratedOnAdd();
+                b.Property<string>("materialname").HasMaxLength(100);
+                b.Property<int>("amount");
+                b.HasKey("id");
+                b.Property<int>("m_id").IsRequired();
+                b.HasIndex("m_id");
+                b.ToTable("Manufacturer");
+            });
+
+              modelBuilder.Entity("Production.Models.Product", b =>
             {
                 b.Property<int>("id").ValueGeneratedOnAdd();
                 b.Property<string>("p_name").HasMaxLength(100);
@@ -27,15 +48,7 @@ namespace Production.Data.Migrations
                 b.Property<int>("m_id").IsRequired();
                 b.HasKey("id");
                 b.HasIndex("m_id");
-                b.ToTable("Manufactirer");
-            });
-
-            modelBuilder.Entity("Production.Models.Manufacturer", b =>
-            {
-                b.Property<int>("id").IsRequired().ValueGeneratedOnAdd();
-                b.Property<string>("name").HasMaxLength(100);
-                b.Property<string>("address").HasMaxLength(100);
-                b.HasKey("id");
+                b.ToTable("Materials");
             });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

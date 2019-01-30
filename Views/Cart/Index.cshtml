@@ -1,29 +1,22 @@
 @model IEnumerable<Production.Models.Cart>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Корзина";
 }
 
-<h1>Index</h1>
-@if (User.Identity.Name == "admin@admin.net") {
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-}
+<h1>Корзина</h1>
+@User.Identity.Name
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.item_name)
+                Item Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.sum)
+                Sum
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.items_amount)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.user_id)
+                Amount 
             </th>
             <th></th>
         </tr>
@@ -41,9 +34,6 @@
                 @Html.DisplayFor(modelItem => item.items_amount)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.user_id)
-            </td>
-            <td>
                 <button class="btn btn-danger">
                 <a asp-action="Delete" asp-route-id="@item.id">Удалить</a></button>
             </td>
@@ -51,5 +41,3 @@
 }
     </tbody>
 </table>
-
-@Html.ActionLink("Order","makeOrder","CartController")

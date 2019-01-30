@@ -19,7 +19,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.materialname)
+                Name
+            </th>
+            <th>
+                Amount
             </th>
             <th></th>
         </tr>
@@ -29,6 +32,9 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.materialname)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.amount)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |

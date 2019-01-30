@@ -13,6 +13,5 @@ namespace Production.Data
             : base(options)
         {
         }
-        public DbSet<Production.Models.Materials> Materials { get; set; }
     }
 }
