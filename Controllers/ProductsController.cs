@@ -26,13 +26,15 @@ namespace Production.Controllers
             await _context.SaveChangesAsync();
         }
 
-        public async void AddToCart([FromQuery] float sum, [FromQuery] int amount,[FromQuery] string id,[FromQuery] string item_p_name){ 
+        public async void AddToCart([FromQuery] float sum, [FromQuery] int amount,[FromQuery] string item_name) { 
             Cart cart = new Cart();
             cart.sum = sum;
-            cart.user_id = id;
+            cart.user_id = User.Identity.Name;
             cart.items_amount = amount;
-            cart.item_name = item_p_name;
-            _context.Add(cart);
+            cart.item_name = item_name;
+            _context.Cart.Add(cart);
+            var prod = _context.Product.SingleOrDefault(x => x.p_name == item_name);
+            prod.amount -= amount;
             await _context.SaveChangesAsync();
         }
 

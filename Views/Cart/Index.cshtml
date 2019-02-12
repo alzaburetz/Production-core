@@ -41,3 +41,15 @@
 }
     </tbody>
 </table>
+
+<button onclick="scr()" value="">Оформить заказ</button>
+<script>
+    let path = window.location.origin; 
+    let requestPath = path+`/Cart/makeOrder`;
+
+      function scr(){ 
+        fetch(requestPath).then( r => console.log(r));
+        alert("Заказ отправлен");
+        window.location.reload();
+    } 
+</script>

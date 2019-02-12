@@ -27,9 +27,12 @@ namespace Production.Controllers
             int i = 0;
             foreach (Cart item in cart) {
                 Cart input = new Cart();
+                input.id = item.id;
                 input.item_name = item.item_name;
                 sum += item.sum;
                 input.user_id = item.user_id;
+                input.sum = item.sum;
+                input.items_amount = item.items_amount;
                 object json  = JsonConvert.SerializeObject(input);
                 items[i] = json.ToString();
                 i++;
@@ -37,15 +40,19 @@ namespace Production.Controllers
             }
             object final = "[";
             for (i = 0; i < items.Length; i++) {
-                final += items[i] + ",";
+                final += items[i];
+                if (i != items.Length-1) {
+                    final += ",";
+                }
             }
             final += "]";
             Orders order = new Orders();
             order.items = final.ToString();
             order.summa = sum;
              _context.Add(order);
+             _context.Cart.RemoveRange(cart);
             await _context.SaveChangesAsync();
-            Console.Beep();
+            
             
         }
         // GET: Cart
@@ -82,6 +89,8 @@ namespace Production.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var cart = await _context.Cart.FindAsync(id);
+            var product = _context.Product.SingleOrDefault(x => x.p_name == cart.item_name);
+            product.amount += cart.items_amount;
             _context.Cart.Remove(cart);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

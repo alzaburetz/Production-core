@@ -19,9 +19,14 @@
         <dd class = "col-sm-12">
             @Html.DisplayFor(model => model.description)
         </dd>
+        <dd class="col-sm-12">
+            @Html.DisplayFor(model => model.amount)
+        </dd>
     </dl>
 </div>
 <div>
+
+<input type="number" max=model.amount min=1 id="amount"/>
 
 @if (User.Identity.Name == "admin@admin.net") {
     <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> 
@@ -29,16 +34,21 @@
     <a asp-action="Index">Back to List</a>
 </div>
 <button onclick="addToCart()">Добавить в корзину</button> 
-<script> 
+<script>  
+    function addToCart(){ 
+        
     let path = window.location.origin; 
     let price = @Html.Raw(Model.price); 
-    let amount = @Html.Raw(Model.amount); 
+    //let amount = @Html.Raw(Model.amount); 
+    var amount = document.getElementById("amount").value
+
     let sum = price * amount; 
-    let userName = "@Html.Raw(User.Identity.Name)"; 
     let modelName = "@Html.Raw(Model.p_name)"; 
-    let requestPath = path+`/Products/AddToCart?sum=${sum}&amount=${amount}&id=${userName}&item_name=${modelName}`; 
-    console.log(requestPath); 
-    function addToCart(){ 
-        fetch(requestPath).then( r => console.log(r)); 
+    let requestPath = path+`/Products/AddToCart?sum=${sum}&amount=${amount}&item_name=${modelName}`; 
+        let test= document.getElementById("amount").value;
+        console.log(test);
+        fetch(requestPath).then( r => console.log(r));
+        alert("Добавлено в корзину"); 
+        window.location.reload();
     } 
 </script>
