@@ -35,6 +35,7 @@ namespace Production.Controllers
             _context.Cart.Add(cart);
             var prod = _context.Product.SingleOrDefault(x => x.p_name == item_name);
             prod.amount -= amount;
+            if (prod.amount <= 0) _context.Product.Remove(prod);
             await _context.SaveChangesAsync();
         }
 
