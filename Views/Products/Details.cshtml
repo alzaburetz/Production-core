@@ -26,14 +26,15 @@
 </div>
 <div>
 
-<input type="number" max=model.amount min=1 id="amount"/>
-
 @if (User.Identity.Name == "admin@admin.net") {
     <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> 
 }
-    <a asp-action="Index">Back to List</a>
+
 </div>
+@if (User.Identity.Name != null) {
+<input type="number" max=model.amount min=1 id="amount"/>
 <button onclick="addToCart()">Добавить в корзину</button> 
+}
 <script>  
     function addToCart(){ 
         
