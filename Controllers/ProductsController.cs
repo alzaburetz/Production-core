@@ -66,7 +66,12 @@ namespace Production.Controllers
         // GET: Products/Create
         public IActionResult Create()
         {
+            if (User.Identity.Name == "admin@admin.net") {
             return View();
+            } else {
+
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         // POST: Products/Create
@@ -89,6 +94,7 @@ namespace Production.Controllers
         // GET: Products/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            if (User.Identity.Name == "admin@admin.net") {
             if (id == null)
             {
                 return NotFound();
@@ -100,6 +106,9 @@ namespace Production.Controllers
                 return NotFound();
             }
             return View(product);
+            } else {
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         // POST: Products/Edit/5
@@ -140,6 +149,7 @@ namespace Production.Controllers
         // GET: Products/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            if (User.Identity.Name == "admin@admin.net") {
             if (id == null)
             {
                 return NotFound();
@@ -153,6 +163,9 @@ namespace Production.Controllers
             }
 
             return View(product);
+            } else {
+                return RedirectToAction(nameof(Index));
+            }
         }
 
         // POST: Products/Delete/5
