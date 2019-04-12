@@ -56,15 +56,14 @@ namespace Production.Controllers
             
         }
         // GET: Cart
+        public virtual List<Cart> getIndex()
+        {
+            return _context.Cart.Where(x => x.user_id == User.Identity.Name.ToString()).ToList();
+        }
         public async Task<IActionResult> Index()
         {
-            var test = _context.Cart;
-            return View(await test.Where(x => x.user_id == User.Identity.Name.ToString()).ToListAsync());
+            return View(getIndex());
         }
-
-        // GET: Cart/Details/5
-        
-
         // GET: Cart/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
@@ -82,21 +81,32 @@ namespace Production.Controllers
 
             return View(cart);
         }
+        public virtual Cart getDeletable(int id)
+        {
+            var cart =  _context.Cart.FirstOrDefault(m => m.id == id);
+            if (cart.id == 0) {
+                throw new NullReferenceException();
+            } else {
+            return cart;
+            }
+        }
 
         // POST: Cart/Delete/5
-        [HttpPost, ActionName("Delete")]
+        [HttpDelete, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var cart = await _context.Cart.FindAsync(id);
+            var cart = getDeletable(id);
             var product = _context.Product.SingleOrDefault(x => x.p_name == cart.item_name);
             product.amount += cart.items_amount;
             _context.Cart.Remove(cart);
-            await _context.SaveChangesAsync();
+             _context.SaveChangesAsync();
+            
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CartExists(int id)
+        public virtual bool CartExists(int id)
         {
             return _context.Cart.Any(e => e.id == id);
         }
