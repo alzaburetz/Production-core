@@ -31,10 +31,9 @@
                 <input asp-for="amount" class="form-control" />
                 <span asp-validation-for="amount" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="manufacturer">
                 <!-- <label asp-for="m_id" class="control-label"></label> -->
-                <p>Manufacturer ID</p>
-                <input asp-for="m_id" class="form-control" />
+                <p>Manufacturer</p>
                 <span asp-validation-for="m_id" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -53,3 +52,29 @@
 }
 </body>
 </html>
+<script>
+    let requestPath = window.location.origin+ '/Manufacturers/GetAll';
+    fetch(requestPath)
+        .then(res => {
+            res.json()
+                .then(function(result) {
+                    var manufacturers = JSON.parse(result);
+                    console.log(manufacturers);
+                    var myDiv = document.getElementById("manufacturer");
+                    var select = document.createElement("select")
+                    select.id = "m_select";
+                    select.name = "m_id";
+                    select.setAttribute('asp-for','m_id');
+                    select.className = "form-control";
+                    myDiv.appendChild(select);
+                    for (var i = 0; i < manufacturers.length; i++) {
+                        var option = document.createElement("option");
+                        option.value = manufacturers[i].id;
+                        option.text = manufacturers[i].Name;
+                        select.appendChild(option);
+                    }
+                })
+                .catch(err => console.log(err))
+        })
+        .catch(err => console.log(err));
+</script>
