@@ -18,6 +18,12 @@ namespace Production.Controllers
             _context = context;
         }
 
+        public virtual JsonResult GetAll() 
+        {
+            var manufacturers = _context.Manufacturer.ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(manufacturers, Newtonsoft.Json.Formatting.Indented);
+            return new JsonResult(json);
+        }
         // GET: Manufacturers
         public async Task<IActionResult> Index()
         {
