@@ -73,7 +73,7 @@ namespace Production.Controllers
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
+        // [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("id,p_name, description,amount,price,material_id,material")] Product product)
         {
             if (ModelState.IsValid)
@@ -166,9 +166,15 @@ namespace Production.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ProductExists(int id)
+        public virtual bool ProductExists(int id)
         {
             return _context.Product.Any(e => e.id == id);
+        }
+        [HttpGet, ActionName("GetMaterials")]
+        public virtual JsonResult GetMaterials() {
+            var materials = _context.Materials.ToList();
+            string json = Newtonsoft.Json.JsonConvert.SerializeObject(materials, Newtonsoft.Json.Formatting.Indented);
+            return new JsonResult(json);
         }
     }
 }
