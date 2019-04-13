@@ -4,12 +4,7 @@
     ViewData["Title"] = "Details";
 }
 
-@{
-    
-}
-
-
-    
+ 
 <h1>Подробности</h1>
 
 <div>
@@ -19,7 +14,7 @@
         <dd class = "col-sm-12">
             @Html.DisplayFor(model => model.description)
         </dd>
-        <dd class="col-sm-12">
+        <dd class="col-sm-12" id="model_amount">
             @Html.DisplayFor(model => model.amount)
         </dd>
     </dl>
@@ -33,23 +28,51 @@
 </div>
 @if (User.Identity.Name != null) {
 <input type="number" max=model.amount min=1 id="amount"/>
-<button onclick="addToCart()">Добавить в корзину</button> 
+<br>
+<br>
+<a asp-controller="Cart" asp-action="Index" id="notification">
+</a>
+<br>
+<br>
+<button class="btn" onclick="addToCart()">Добавить в корзину</button> 
 }
 <script>  
+    let modelam = parseInt(@Html.Raw(Model.amount));
     function addToCart(){ 
         
     let path = window.location.origin; 
     let price = @Html.Raw(Model.price); 
-    //let amount = @Html.Raw(Model.amount); 
-    var amount = document.getElementById("amount").value
-
+    let amount = parseInt(document.getElementById("amount").value);
+    console.log(modelam > 10000)
+    if (modelam < amount || amount <= 0) {
+        pushNotification("Неправильные данные", false,0)
+    }
+    else {
     let sum = price * amount; 
     let modelName = "@Html.Raw(Model.p_name)"; 
-    let requestPath = path+`/Products/AddToCart?sum=${sum}&amount=${amount}&item_name=${modelName}`; 
+    let requestPath = path+`/Products/AddToCart?sum=${sum.toFixed(2)}&amount=${amount}&item_name=${modelName}`; 
         let test= document.getElementById("amount").value;
         console.log(test);
         fetch(requestPath).then( r => console.log(r));
-        alert("Добавлено в корзину"); 
-        window.location.reload();
+        pushNotification("Успешно добавлено в корзину", true,amount);
+    }
     } 
+
+    function pushNotification(message, state, reduce) {
+        var notification = document.getElementById("notification");
+        if (state) {
+            notification.classList.remove("btn-warning");
+            notification.classList.add("btn", "btn-success");
+            notification.setAttribute("href","/Cart");
+        } else {
+            notification.classList.remove("btn-success");
+            notification.classList.add("btn", "btn-warning");
+            notification.removeAttribute('href');
+        }
+        notification.innerText = message;
+        document.getElementById("model_amount").innerText = modelam - reduce;
+        modelam -= reduce;
+    }
+
+    
 </script>
