@@ -4,19 +4,16 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h1>Заказы</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.summa)
+               Сумма заказа
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.items)
+                Заказчик
             </th>
             <th></th>
         </tr>
@@ -27,15 +24,30 @@
             <td>
                 @Html.DisplayFor(modelItem => item.summa)
             </td>
-            <td>
+            <td name="items">
+                <div id="itemm">
                 @Html.DisplayFor(modelItem => item.items)
+                </div>
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.id">Delete</a>
+                <a asp-action="Details" asp-route-id="@item.id">Подробнее</a> 
+                <a asp-action="Delete" asp-route-id="@item.id" class="btn-danger">Удалить</a>
             </td>
         </tr>
 }
     </tbody>
 </table>
+
+<script>
+    var strings=document.getElementsByName("items");
+    console.log(strings);
+    for (var i = 0; i < strings.length; i++) {
+        var string = strings[i].innerText;
+        var json = JSON.parse(string);
+        console.log(json[0].user_id);
+        strings[i].removeChild(document.getElementById("itemm"));
+        var p = document.createElement("p");
+        p.innerText = json[0].user_id;
+        strings[i].appendChild(p);   
+    }
+</script>

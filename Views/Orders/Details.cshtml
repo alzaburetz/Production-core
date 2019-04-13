@@ -4,27 +4,42 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Подробнее</h1>
+<div>
+    <a asp-action="Index">Обратно к списку</a>
+</div>
 
-<div>
-    <h4>Orders</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.summa)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.summa)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.items)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.items)
-        </dd>
-    </dl>
+<div> 
+    <table class="table">
+    <thead>
+        <tr>
+        <th class="lg-col">Сумма</th>
+        <th>Наименование</th>
+        <th>Количество</th>
+        </tr>
+    </thead>
+    <tbody id="main">
+
+    </tbody>
+    </table>
 </div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model.id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+
+<script>
+    var table = document.getElementById("main")
+    var data = @Html.Raw(@Model.items)
+    console.log(data)
+    for (var i = 0; i < data.length; i++) {
+        var tr = document.createElement("tr");
+        var tdsum = document.createElement("td");
+        var tditem = document.createElement("td");
+        var tdamount = document.createElement("td");
+        tdsum.innerText = data[i].sum;
+        tditem.innerText = data[i].item_name;
+        tdamount.innerText = data[i].items_amount;
+        tr.appendChild(tdsum);
+        tr.appendChild(tditem);
+        tr.appendChild(tdamount);
+        table.appendChild(tr);
+    }
+</script>
+
