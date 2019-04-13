@@ -36,8 +36,7 @@ namespace Production.Controllers
             try {
             var prod = _context.Product.SingleOrDefault(x => x.p_name == item_name);
             prod.amount -= amount;
-            if (prod.amount <= 0) _context.Product.Remove(prod);
-            } catch(NullReferenceException ex) {
+            } catch(Exception ex) {
                 Console.WriteLine(ex.Message);
             }   
             await _context.SaveChangesAsync();
@@ -46,7 +45,11 @@ namespace Production.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
+            if (User.Identity.Name == "admin@admin.net") {
             return View(await _context.Product.ToListAsync());
+            } else {
+                return View(await _context.Product.Where(p => p.amount > 0).ToListAsync());
+            }
         }
 
         // GET: Products/Details/5
