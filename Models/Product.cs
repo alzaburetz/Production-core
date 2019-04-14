@@ -2,6 +2,7 @@ using System.ComponentModel.DataAnnotations;
 namespace Production.Models {
     public class Product {
         public int id {set; get;}
+        [Required]
         public string p_name {get; set;}
         public string  description {get; set;}
         [Range(1,int.MaxValue)]
