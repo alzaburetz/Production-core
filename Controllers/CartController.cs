@@ -82,7 +82,7 @@ namespace Production.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var cart = getDeletable(id);
-            var product =  await _context.Product.SingleOrDefault(x => x.p_name == cart.item_name);
+            var product =  await _context.Product.SingleOrDefaultAsync(x => x.p_name == cart.item_name);
             product.amount += cart.items_amount;
             _context.Cart.Remove(cart);
             await _context.SaveChangesAsync();
