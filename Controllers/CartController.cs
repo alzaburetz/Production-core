@@ -19,40 +19,24 @@ namespace Production.Controllers
         {
             _context = context;
         }
-        public async void makeOrder() {
-        var cart = _context.Cart.Where(x => x.user_id == User.Identity.Name)
-            .ToArray();
-            string[] items = new string[cart.Count()];
+        public virtual async Task<JsonResult> makeOrder() {
+        var cart = await _context.Cart.Where(x => x.user_id == User.Identity.Name).ToListAsync();
+            
             float sum = 0.0f;
-            int i = 0;
             foreach (Cart item in cart) {
-                Cart input = new Cart();
-                input.id = item.id;
-                input.item_name = item.item_name;
                 sum += item.sum;
-                input.user_id = item.user_id;
-                input.sum = item.sum;
-                input.items_amount = item.items_amount;
-                object json  = JsonConvert.SerializeObject(input);
-                items[i] = json.ToString();
-                i++;
-                
             }
-            object final = "[";
-            for (i = 0; i < items.Length; i++) {
-                final += items[i];
-                if (i != items.Length-1) {
-                    final += ",";
-                }
-            }
-            final += "]";
             Orders order = new Orders();
-            order.items = final.ToString();
+            order.items = JsonConvert.SerializeObject(cart);
             order.summa = sum;
-             _context.Add(order);
+            await _context.AddAsync(order);
              _context.Cart.RemoveRange(cart);
             await _context.SaveChangesAsync();
-            
+            if (cart != null) {
+                return new JsonResult("Successfully added");
+            } else {
+                return new JsonResult("Error");
+            }
             
         }
         // GET: Cart
