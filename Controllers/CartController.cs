@@ -40,13 +40,13 @@ namespace Production.Controllers
             
         }
         // GET: Cart
-        public virtual List<Cart> getIndex()
+        public virtual async Task<List<Cart>> getIndex()
         {
-            return _context.Cart.Where(x => x.user_id == User.Identity.Name.ToString()).ToList();
+            return await _context.Cart.Where(x => x.user_id == User.Identity.Name.ToString()).ToListAsync();
         }
         public async Task<IActionResult> Index()
         {
-            return View(getIndex());
+            return View(await getIndex());
         }
         // GET: Cart/Delete/5
         public async Task<IActionResult> Delete(int? id)
@@ -82,10 +82,10 @@ namespace Production.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var cart = getDeletable(id);
-            var product = _context.Product.SingleOrDefault(x => x.p_name == cart.item_name);
+            var product =  await _context.Product.SingleOrDefault(x => x.p_name == cart.item_name);
             product.amount += cart.items_amount;
             _context.Cart.Remove(cart);
-             _context.SaveChangesAsync();
+            await _context.SaveChangesAsync();
             
             return RedirectToAction(nameof(Index));
         }
