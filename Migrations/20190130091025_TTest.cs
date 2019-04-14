@@ -81,7 +81,8 @@ namespace Production.Migrations
                     description = table.Column<string>(nullable: true),
                     amount = table.Column<int>(nullable: false),
                     price = table.Column<float>(nullable: false),
-                    material_id = table.Column<int>(nullable: false)
+                    material_id = table.Column<int>(nullable: false),
+                    material = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
