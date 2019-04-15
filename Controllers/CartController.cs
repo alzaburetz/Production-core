@@ -44,12 +44,13 @@ namespace Production.Controllers
         {
             return await _context.Cart.Where(x => x.user_id == User.Identity.Name.ToString()).ToListAsync();
         }
+
         public async Task<IActionResult> Index()
         {
             return View(await getIndex());
         }
         // GET: Cart/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public virtual async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -76,7 +77,7 @@ namespace Production.Controllers
         }
 
         // POST: Cart/Delete/5
-        [HttpDelete, ActionName("Delete")]
+        [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         
         public async Task<IActionResult> DeleteConfirmed(int id)
